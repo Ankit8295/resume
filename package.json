@@ -1,8 +1,5 @@
 {
   "name": "resume",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.html",
   "scripts": {
     "start": "parcel index.html",
     "build": "parcel build index.html"
@@ -16,5 +13,10 @@
   "bugs": {
     "url": "https://github.com/Ankit8295/resume/issues"
   },
-  "homepage": "https://github.com/Ankit8295/resume#readme"
+  "homepage": "https://github.com/Ankit8295/resume#readme",
+  "version": "1.0.0",
+  "description": "",
+  "devDependencies": {
+    "parcel": "^2.7.0"
+  }
 }
