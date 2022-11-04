@@ -1,56 +1,55 @@
-'use strict';
+"use strict";
 
-///////////////////////////////////////
-
-const btnScollTo = document.querySelector('.btn--scroll-to');
-
-const sec1 = document.querySelector('#section--1');
+const btnScollTo = document.querySelector(".btn--scroll-to");
+const sec1 = document.querySelector("#section--1");
+const moveToTopBtn = document.querySelector(".movetop");
+const nav = document.querySelector(".nav");
+const allSections = document.querySelectorAll(".section");
+const navLink = document.querySelector(".nav");
+const slides = document.querySelectorAll(".slide");
+const slider = document.querySelector(".slider");
+const btnLeft = document.querySelector(".slider__btn--left");
+const btnRight = document.querySelector(".slider__btn--right");
+const dotContainer = document.querySelector(".dots");
 
 /////////////scoll tbn to section1
-
-btnScollTo.addEventListener('click', function (e) {
+btnScollTo.addEventListener("click", function (e) {
   e.preventDefault();
-  sec1.scrollIntoView({ behavior: 'smooth' });
+  sec1.scrollIntoView({ behavior: "smooth" });
 });
 
 //scroll with nav links
-document.querySelector('.nav__links').addEventListener('click', function (e) {
+document.querySelector(".nav__links").addEventListener("click", function (e) {
   e.preventDefault();
-  if (e.target.classList.contains('nav__link')) {
-    const id = e.target.getAttribute('href');
+  if (e.target.classList.contains("nav__link")) {
+    const id = e.target.getAttribute("href");
     document.querySelector(id).scrollIntoView({
-      behavior: 'smooth',
+      behavior: "smooth",
     });
   }
 });
 
 /////nav hover effect
-const nav = document.querySelector('.nav');
-
 const hoverEffect = function (e) {
-  if (e.target.classList.contains('nav__link')) {
+  if (e.target.classList.contains("nav__link")) {
     const link = e.target;
-    const sibling = link.closest('.nav').querySelectorAll('.nav__link');
+    const sibling = link.closest(".nav").querySelectorAll(".nav__link");
 
-    sibling.forEach(sib => {
+    sibling.forEach((sib) => {
       if (sib !== link) {
         sib.style.opacity = this;
       }
     });
   }
 };
-
-nav.addEventListener('mouseover', hoverEffect.bind(0.5));
-nav.addEventListener('mouseout', hoverEffect.bind(1));
+nav.addEventListener("mouseover", hoverEffect.bind(0.5));
+nav.addEventListener("mouseout", hoverEffect.bind(1));
 
 /////scrolling effect for section
-const allSections = document.querySelectorAll('.section');
-
 const secObsFunc = function (sec, observer) {
   const [sect] = sec;
   if (!sect.isIntersecting) return;
-
-  sect.target.classList.remove('section--hidden');
+  sect.target.classList.remove("section--hidden");
   observer.unobserve(sect.target);
 };
 
@@ -59,45 +58,38 @@ const secObserver = new IntersectionObserver(secObsFunc, {
   threshold: 0.15,
 });
 
-allSections.forEach(section => {
+allSections.forEach((section) => {
   secObserver.observe(section);
-  section.classList.add('section--hidden');
+  section.classList.add("section--hidden");
 });
 
 //////sticky nav after front page
-const navLink = document.querySelector('.nav');
 const navheight = navLink.getBoundingClientRect().height;
-
 const navObserve = function (nav) {
-  nav.forEach(navbar => {
+  nav.forEach((navbar) => {
     if (navbar.isIntersecting) {
-      navLink.classList.remove('sticky');
+      moveToTopBtn.style.opacity = 0;
+      navLink.classList.remove("sticky");
     } else {
-      navLink.classList.add('sticky');
+      moveToTopBtn.style.opacity = 1;
+      navLink.classList.add("sticky");
     }
   });
 };
-
 const navObserver = new IntersectionObserver(navObserve, {
   root: null,
   threshold: 0,
   rootMargin: `-${navheight}px`,
 });
-
-navObserver.observe(document.querySelector('.header'));
+navObserver.observe(document.querySelector(".header"));
 
 /////slider for section 3
-
-const slides = document.querySelectorAll('.slide');
-const slider = document.querySelector('.slider');
-const btnLeft = document.querySelector('.slider__btn--left');
-const btnRight = document.querySelector('.slider__btn--right');
-const dotContainer = document.querySelector('.dots');
 let currslide = 0;
+
 const createdots = function () {
   slides.forEach(function (_, i) {
     dotContainer.insertAdjacentHTML(
-      'beforeend',
+      "beforeend",
       `<button class="dots__dot" data-slide="${i}"></button>`
     );
   });
@@ -133,31 +125,37 @@ const prevSlide = function () {
 
 const activedots = function (slide) {
   document
-    .querySelectorAll('.dots__dot')
-    .forEach(dot => dot.classList.remove('dots__dot--active'));
+    .querySelectorAll(".dots__dot")
+    .forEach((dot) => dot.classList.remove("dots__dot--active"));
   document
     .querySelector(`.dots__dot[data-slide="${slide}"]`)
-    .classList.add('dots__dot--active');
+    .classList.add("dots__dot--active");
 };
 activedots(0);
 
-btnRight.addEventListener('click', nextSlide);
+btnRight.addEventListener("click", nextSlide);
 
-btnLeft.addEventListener('click', prevSlide);
+btnLeft.addEventListener("click", prevSlide);
 
-document.addEventListener('keydown', function (e) {
-  if (e.key === 'ArrowLeft') prevSlide();
-  else if (e.key === 'ArrowRight') nextSlide();
+document.addEventListener("keydown", function (e) {
+  if (e.key === "ArrowLeft") prevSlide();
+  else if (e.key === "ArrowRight") nextSlide();
 });
 
-dotContainer.addEventListener('click', function (e) {
-  if (e.target.classList.contains('dots__dot')) {
+dotContainer.addEventListener("click", function (e) {
+  if (e.target.classList.contains("dots__dot")) {
     const slide = e.target.dataset.slide;
     changeSlide(slide);
     activedots(slide);
   }
 });
 
-document.querySelector('.send_msg').addEventListener('click', function (e) {
+//move to top btn
+moveToTopBtn.addEventListener("click", function (e) {
+  e.preventDefault();
+  document.querySelector(".header").scrollIntoView({ behavior: "smooth" });
+});
+
+document.querySelector(".send_msg").addEventListener("click", function (e) {
   e.preventDefault();
 });

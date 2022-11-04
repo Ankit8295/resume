@@ -15,7 +15,19 @@ body {
   font-weight: 300;
   color: #444;
   line-height: 1.9;
-  background-color: #f3f3f3;
+  background-color: #e2e0e0;
+}
+.movetop {
+  position: fixed;
+  text-decoration: none;
+  color: black;
+  bottom: 5%;
+  right: 5%;
+  opacity: 0;
+  height: 5rem;
+  width: 5rem;
+  z-index: 100;
+  cursor: pointer;
 }
 
 /* GENERAL ELEMENTS */
@@ -93,7 +105,7 @@ body {
 .about_detail img {
   width: 20rem;
   height: 20rem;
-  border-radius: 50%;
+  border-radius: 20%;
 }
 .about_detail p {
   font-weight: 400;
@@ -116,7 +128,7 @@ body {
   font-size: 2.5rem;
 }
 .education_title p {
-  font-size: 2rem;
+  font-size: 1.8rem;
 }
 
 /* NAVIGATION */
@@ -124,7 +136,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 7rem;
+  height: 6.5rem;
   width: 100%;
   padding: 0 6rem;
   z-index: 100;
@@ -133,7 +145,7 @@ body {
 /* nav and stickly class at the same time */
 .nav.sticky {
   position: fixed;
-  background-color: rgba(33, 20, 4, 0.95);
+  background-color: #37383d;
 }
 
 .nav__links {
@@ -349,6 +361,7 @@ body {
   font-weight: 300;
 }
 .contact_form input {
+  border: none;
   height: 4rem;
   font-size: 2rem;
   text-align: start;
@@ -360,6 +373,7 @@ body {
   min-height: 14rem;
   max-width: 100%;
   min-width: 100%;
+  border: none;
   padding: 0.5rem;
 }
 .send_msg {
@@ -530,7 +544,7 @@ body {
     font-size: 2rem;
     max-height: 10rem;
     min-height: 14rem;
-    max-width: 25rem;
+    max-width: 30rem;
     min-width: 25rem;
     padding: 0.5rem;
   }
@@ -554,5 +568,9 @@ body {
   }
   .send_msg:active {
     transform: translateY(0.2rem);
+  }
+  .footer {
+    padding: 0;
+    height: 20rem;
   }
 }
